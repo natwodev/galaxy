@@ -6,11 +6,17 @@ import GalaxyChat from './components/GalaxyChat';
 import Features from './components/Features';
 import CommandDeck from './components/CommandDeck';
 import PlanetarySystem from './components/PlanetarySystem';
+import ArchiveTerminal from './features/archives/ArchiveTerminal';
+import SettingsPanel from './features/settings/SettingsPanel';
+import CommanderProfile from './features/profile/CommanderProfile';
+import DecryptionGame from './features/simulation/DecryptionGame';
 import { PageView } from './types';
+import { useSound } from './contexts/SoundContext';
 
 const App: React.FC = () => {
   const [currentPage, setCurrentPage] = useState<PageView>(PageView.HOME);
   const [isBooting, setIsBooting] = useState(true);
+  const { playSuccess } = useSound();
 
   // Simulated Boot Sequence
   useEffect(() => {
@@ -32,6 +38,14 @@ const App: React.FC = () => {
         return <CommandDeck />;
       case PageView.GALAXY_MAP:
         return <PlanetarySystem />;
+      case PageView.ARCHIVES:
+        return <ArchiveTerminal />;
+      case PageView.SETTINGS:
+        return <SettingsPanel />;
+      case PageView.PROFILE:
+        return <CommanderProfile />;
+      case PageView.SIMULATION:
+        return <DecryptionGame />;
       default:
         return <Hero onNavigate={setCurrentPage} />;
     }

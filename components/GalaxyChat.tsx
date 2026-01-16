@@ -1,13 +1,15 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Send, Bot, User, Sparkles, Terminal, Cpu, Save } from 'lucide-react';
+import { Send, Bot, Save } from 'lucide-react';
 import { Message } from '../types';
 import { generateGalaxyContent } from '../services/geminiService';
 import { useLanguage } from '../contexts/LanguageContext';
+import MessageBubble from '../features/chat/components/MessageBubble';
+import ChatSidebar from '../features/chat/components/ChatSidebar';
+import GlassCard from './ui/GlassCard';
 
 const GalaxyChat: React.FC = () => {
   const { t, language } = useLanguage();
   
-  // Initialize with correct language welcome
   const [messages, setMessages] = useState<Message[]>([
     {
       role: 'model',
@@ -16,7 +18,6 @@ const GalaxyChat: React.FC = () => {
     }
   ]);
   
-  // Reset welcome message if language changes and it's the only message
   useEffect(() => {
      if (messages.length === 1 && messages[0].role === 'model') {
          setMessages([{
@@ -52,7 +53,6 @@ const GalaxyChat: React.FC = () => {
     setInput('');
     setIsLoading(true);
 
-    // Pass the current language to the service
     const responseText = await generateGalaxyContent(input, language);
 
     const botMessage: Message = {
@@ -75,34 +75,10 @@ const GalaxyChat: React.FC = () => {
   return (
     <div className="flex h-[calc(100vh-80px)] pt-20 pb-4 px-4 max-w-7xl mx-auto gap-4">
       
-      {/* Sidebar - Context/Logs */}
-      <div className="hidden lg:flex w-64 glass-panel rounded-2xl flex-col overflow-hidden border border-white/10">
-         <div className="p-4 bg-white/5 border-b border-white/5">
-            <h3 className="text-cyan-400 font-mono-tech text-sm font-bold flex items-center gap-2">
-                <Terminal size={14} /> MISSION LOGS
-            </h3>
-         </div>
-         <div className="flex-1 p-4 space-y-4 overflow-y-auto">
-            <div className="text-xs text-gray-500 font-mono">
-                <p className="mb-2">> INITIALIZING CHAT MODULE...</p>
-                <p className="mb-2">> ENCRYPTION: AES-256-GCM</p>
-                <p className="mb-2">> CONNECTED TO: GEMINI-3-FLASH</p>
-                <p className="mb-2 text-green-400">> LINK ESTABLISHED</p>
-            </div>
-            
-            <div className="mt-8">
-                <h4 className="text-xs text-purple-400 font-bold uppercase mb-2 flex items-center gap-2"><Cpu size={12}/> Active Context</h4>
-                <div className="p-2 bg-purple-900/20 border border-purple-500/20 rounded text-[10px] text-purple-200">
-                    Mode: {language === 'en' ? 'Sci-Fi Assistant' : 'Trợ lý Viễn tưởng'}<br/>
-                    Lang: {language.toUpperCase()}<br/>
-                    Knowledge: Universal
-                </div>
-            </div>
-         </div>
-      </div>
+      <ChatSidebar />
 
       {/* Main Chat Interface */}
-      <div className="flex-1 glass-panel-heavy rounded-2xl border border-white/10 flex flex-col overflow-hidden relative shadow-[0_0_50px_rgba(0,0,0,0.5)] sci-fi-border">
+      <GlassCard variant="heavy" border={true} className="flex-1 flex flex-col overflow-hidden relative shadow-[0_0_50px_rgba(0,0,0,0.5)]">
         
         {/* Header */}
         <div className="bg-black/40 border-b border-white/5 p-4 flex items-center justify-between backdrop-blur-md z-10">
@@ -129,38 +105,14 @@ const GalaxyChat: React.FC = () => {
         {/* Messages */}
         <div className="flex-1 overflow-y-auto p-4 space-y-6 scroll-smooth">
           {messages.map((msg, idx) => (
-            <div
-              key={idx}
-              className={`flex items-start gap-4 ${msg.role === 'user' ? 'flex-row-reverse' : 'flex-row'} group`}
-            >
-              <div className={`
-                w-10 h-10 rounded-xl flex items-center justify-center shrink-0 border
-                ${msg.role === 'user' 
-                  ? 'bg-purple-900/30 border-purple-500/30 shadow-[0_0_15px_rgba(168,85,247,0.2)]' 
-                  : 'bg-cyan-900/30 border-cyan-500/30 shadow-[0_0_15px_rgba(6,182,212,0.2)]'}
-              `}>
-                {msg.role === 'user' ? <User size={18} className="text-purple-300" /> : <Sparkles size={18} className="text-cyan-300" />}
-              </div>
-              
-              <div className={`
-                max-w-[85%] p-5 rounded-2xl text-sm md:text-base leading-relaxed relative overflow-hidden font-light tracking-wide
-                ${msg.role === 'user'
-                  ? 'bg-gradient-to-br from-purple-900/80 to-indigo-900/80 text-white rounded-tr-none border border-purple-500/20'
-                  : 'bg-white/5 border border-white/10 text-gray-100 rounded-tl-none backdrop-blur-md shadow-lg'}
-              `}>
-                 {/* Decorative corner accent for bot messages */}
-                 {msg.role === 'model' && (
-                     <div className="absolute top-0 left-0 w-3 h-3 border-t border-l border-cyan-500/50 rounded-tl-lg"></div>
-                 )}
-                {msg.text}
-              </div>
-            </div>
+            <MessageBubble key={idx} message={msg} />
           ))}
           
           {isLoading && (
             <div className="flex items-start gap-4">
+               {/* Loading Animation Bubble */}
                <div className="w-10 h-10 rounded-xl bg-cyan-900/30 border border-cyan-500/30 flex items-center justify-center shrink-0">
-                  <Sparkles size={18} className="text-cyan-300 animate-spin-slow" />
+                  <div className="w-1.5 h-1.5 bg-cyan-400 rounded-full animate-bounce" />
                </div>
                <div className="bg-white/5 border border-white/10 p-5 rounded-2xl rounded-tl-none w-32">
                  <div className="flex gap-1.5 items-center justify-center h-full">
@@ -200,7 +152,7 @@ const GalaxyChat: React.FC = () => {
           </div>
         </div>
 
-      </div>
+      </GlassCard>
     </div>
   );
 };
