@@ -16,6 +16,7 @@ export const translations: Record<Language, Dictionary> = {
     nav_archives: 'ARCHIVES',
     nav_profile: 'COMMANDER',
     nav_sim: 'TRAINING SIM',
+    nav_hangar: 'SHIP HANGAR',
     
     // Hero
     hero_badge: 'Powered by Gemini 3 Flash',
@@ -80,6 +81,15 @@ export const translations: Record<Language, Dictionary> = {
     sim_success: 'ACCESS GRANTED',
     sim_fail: 'BREACH DETECTED',
 
+    // Hangar
+    hangar_title: 'FLEET HANGAR',
+    hangar_ship_name: 'INTERCEPTOR X-9',
+    hangar_class: 'CLASS: RECON',
+    hangar_status: 'STATUS: COMBAT READY',
+    hangar_engine: 'ENGINE',
+    hangar_shield: 'SHIELD',
+    hangar_weapon: 'WEAPON',
+
     // Settings
     set_title: 'SYSTEM CONFIGURATION',
     set_sound: 'Interface Audio',
@@ -105,6 +115,7 @@ export const translations: Record<Language, Dictionary> = {
     nav_archives: 'KHO LƯU TRỮ',
     nav_profile: 'HỒ SƠ CHỈ HUY',
     nav_sim: 'MÔ PHỎNG HUẤN LUYỆN',
+    nav_hangar: 'NHÀ CHỨA PHI THUYỀN',
 
     // Hero
     hero_badge: 'Vận hành bởi Gemini 3 Flash',
@@ -168,6 +179,15 @@ export const translations: Record<Language, Dictionary> = {
     sim_level: 'CẤP ĐỘ AN NINH',
     sim_success: 'TRUY CẬP THÀNH CÔNG',
     sim_fail: 'PHÁT HIỆN XÂM NHẬP',
+
+    // Hangar
+    hangar_title: 'NHÀ CHỨA HẠM ĐỘI',
+    hangar_ship_name: 'CHIẾN ĐẤU CƠ X-9',
+    hangar_class: 'LOẠI: TRINH SÁT',
+    hangar_status: 'TRẠNG THÁI: SẴN SÀNG',
+    hangar_engine: 'ĐỘNG CƠ',
+    hangar_shield: 'LÁ CHẮN',
+    hangar_weapon: 'VŨ KHÍ',
 
     // Settings
     set_title: 'CẤU HÌNH HỆ THỐNG',

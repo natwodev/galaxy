@@ -15,7 +15,8 @@ export enum PageView {
   SETTINGS = 'SETTINGS',
   ARCHIVES = 'ARCHIVES',
   PROFILE = 'PROFILE',
-  SIMULATION = 'SIMULATION'
+  SIMULATION = 'SIMULATION',
+  HANGAR = 'HANGAR'
 }
 
 export type Language = 'en' | 'vi';

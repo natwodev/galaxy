@@ -10,6 +10,7 @@ import ArchiveTerminal from './features/archives/ArchiveTerminal';
 import SettingsPanel from './features/settings/SettingsPanel';
 import CommanderProfile from './features/profile/CommanderProfile';
 import DecryptionGame from './features/simulation/DecryptionGame';
+import Hangar from './features/hangar/Hangar';
 import { PageView } from './types';
 import { useSound } from './contexts/SoundContext';
 
@@ -46,6 +47,8 @@ const App: React.FC = () => {
         return <CommanderProfile />;
       case PageView.SIMULATION:
         return <DecryptionGame />;
+      case PageView.HANGAR:
+        return <Hangar />;
       default:
         return <Hero onNavigate={setCurrentPage} />;
     }

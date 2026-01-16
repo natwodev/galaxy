@@ -1,5 +1,5 @@
 import React from 'react';
-import { Rocket, MessageCircle, Info, Activity, Menu, X, Globe, Map, Settings, Database, User, Gamepad2 } from 'lucide-react';
+import { Rocket, MessageCircle, Info, Activity, Menu, X, Globe, Map, Settings, Database, User, Gamepad2, Plane } from 'lucide-react';
 import { PageView } from '../types';
 import { useLanguage } from '../contexts/LanguageContext';
 import { useSound } from '../contexts/SoundContext';
@@ -16,8 +16,9 @@ const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate }) => {
 
   const navItems = [
     { id: PageView.HOME, label: t('nav_home'), icon: <Rocket size={18} /> },
-    { id: PageView.GALAXY_MAP, label: t('nav_map'), icon: <Map size={18} /> },
     { id: PageView.DASHBOARD, label: t('nav_deck'), icon: <Activity size={18} /> },
+    { id: PageView.GALAXY_MAP, label: t('nav_map'), icon: <Map size={18} /> },
+    { id: PageView.HANGAR, label: t('nav_hangar'), icon: <Plane size={18} className="rotate-[-45deg]" /> },
     { id: PageView.SIMULATION, label: t('nav_sim'), icon: <Gamepad2 size={18} /> },
     { id: PageView.ARCHIVES, label: t('nav_archives'), icon: <Database size={18} /> },
     { id: PageView.CHAT, label: t('nav_chat'), icon: <MessageCircle size={18} /> },
